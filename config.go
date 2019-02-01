@@ -166,6 +166,7 @@ type config struct {
 	IgnoreSslVerification bool
 
 	LocalFileSystemRoot string
+	LocalCacheRoot      string
 	S3Enabled           bool
 	S3Region            string
 	S3Endpoint          string
@@ -284,6 +285,7 @@ func init() {
 	boolEnvConfig(&conf.IgnoreSslVerification, "IMGPROXY_IGNORE_SSL_VERIFICATION")
 
 	strEnvConfig(&conf.LocalFileSystemRoot, "IMGPROXY_LOCAL_FILESYSTEM_ROOT")
+	strEnvConfig(&conf.LocalCacheRoot, "IMGPROXY_LOCAL_CACHE_ROOT")
 
 	boolEnvConfig(&conf.S3Enabled, "IMGPROXY_USE_S3")
 	strEnvConfig(&conf.S3Region, "IMGPROXY_S3_REGION")

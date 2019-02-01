@@ -4,9 +4,11 @@ import (
 	"context"
 	"crypto/subtle"
 	"fmt"
+	"io/ioutil"
 	"net"
 	"net/http"
 	"net/url"
+	"os"
 	"path/filepath"
 	"strconv"
 	"strings"
@@ -317,5 +319,25 @@ func (h *httpHandler) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 
 	checkTimeout(ctx)
 
+	if conf.LocalCacheRoot != "" {
+		saveToCache(ctx, imageData, r.URL.Path)
+	}
+
 	respondWithImage(ctx, reqID, r, rw, imageData)
+}
+
+func saveToCache(ctx context.Context, data []byte, requestURL string) {
+	parts := strings.Split(strings.TrimPrefix(requestURL, "/"), "/")
+	path := strings.Join(parts[1:], "/")
+
+	fullPath := filepath.Join(conf.LocalCacheRoot, filepath.Dir(path))
+	fullFilename := filepath.Join(conf.LocalCacheRoot, path)
+	po := getProcessingOptions(ctx)
+
+	if po.Format == imageTypeWEBP && !strings.HasSuffix(fullFilename, "@webp") {
+		fullFilename = fmt.Sprintf("%s@webp", fullFilename)
+	}
+
+	os.MkdirAll(fullPath, os.ModePerm)
+	ioutil.WriteFile(fullFilename, data, 0644)
 }
