@@ -332,11 +332,6 @@ func saveToCache(ctx context.Context, data []byte, requestURL string) {
 
 	fullPath := filepath.Join(conf.LocalCacheRoot, filepath.Dir(path))
 	fullFilename := filepath.Join(conf.LocalCacheRoot, path)
-	po := getProcessingOptions(ctx)
-
-	if po.Format == imageTypeWEBP && !strings.HasSuffix(fullFilename, "@webp") {
-		fullFilename = fmt.Sprintf("%s@webp", fullFilename)
-	}
 
 	os.MkdirAll(fullPath, os.ModePerm)
 	ioutil.WriteFile(fullFilename, data, 0644)
