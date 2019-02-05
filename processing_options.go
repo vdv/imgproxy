@@ -317,6 +317,11 @@ func applyEnlargeOption(po *processingOptions, args []string) error {
 		return fmt.Errorf("Invalid enlarge arguments: %v", args)
 	}
 
+	if conf.PreventEnlarge {
+		po.Enlarge = false
+		return nil
+	}
+
 	po.Enlarge = args[0] != "0"
 
 	return nil

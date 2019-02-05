@@ -61,6 +61,8 @@ When you use imgproxy in a development environment, it can be useful to ignore S
 
 * `IMGPROXY_IGNORE_SSL_VERIFICATION`: when true, disables SSL verification, so imgproxy can be used in a development environment with self-signed SSL certificates.
 
+* `IMGPROXY_PREVENT_ENLARGE`: when true, enlarge always 0
+
 ### Compression
 
 * `IMGPROXY_QUALITY`: default quality of the resulting image, percentage. Default: `80`;
@@ -129,6 +131,8 @@ blurry=blur:2
 imgproxy can serve your local images, but this feature is disabled by default. To enable it, specify your local filesystem root:
 
 * `IMGPROXY_LOCAL_FILESYSTEM_ROOT`: the root of the local filesystem. Keep empty to disable serving of local files.
+
+* `IMGPROXY_LOCAL_CACHE_ROOT`: the root of the local filesystem for caching images. Can be usefull for nginx.
 
 Check out the [Serving local files](./serving_local_files.md) guide to learn more.
 

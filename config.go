@@ -151,6 +151,7 @@ type config struct {
 	EnableWebpDetection bool
 	EnforceWebp         bool
 	EnableClientHints   bool
+	PreventEnlarge      bool
 
 	Keys          []securityKey
 	Salts         []securityKey
@@ -268,6 +269,7 @@ func init() {
 	boolEnvConfig(&conf.EnableWebpDetection, "IMGPROXY_ENABLE_WEBP_DETECTION")
 	boolEnvConfig(&conf.EnforceWebp, "IMGPROXY_ENFORCE_WEBP")
 	boolEnvConfig(&conf.EnableClientHints, "IMGPROXY_ENABLE_CLIENT_HINTS")
+	boolEnvConfig(&conf.PreventEnlarge, "IMGPROXY_PREVENT_ENLARGE")
 
 	hexEnvConfig(&conf.Keys, "IMGPROXY_KEY")
 	hexEnvConfig(&conf.Salts, "IMGPROXY_SALT")
